@@ -44,7 +44,6 @@ namespace Api.Geo.Services.Implementation
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(_configuration.GetValue<string>("GeocodingURL"));
             HttpResponseMessage response = await client.PostAsJsonAsync("/api/Geocoding", process, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-            string algo = await response.Content.ReadAsStringAsync();
             return  response.IsSuccessStatusCode ? process.Id : "Failed Request";
         }
     }
